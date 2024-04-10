@@ -1,7 +1,8 @@
+import { kv, createClient } from "@vercel/kv";
 import { Queue, Worker, Job } from "bullmq";
 import IORedis from "ioredis";
 
-const connection = new IORedis({
+const connection = new IORedis(process.env.KV_URL!, {
   maxRetriesPerRequest: null,
 });
 
