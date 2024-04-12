@@ -1,8 +1,9 @@
-import { kv, createClient } from "@vercel/kv";
 import { Queue, Worker, Job } from "bullmq";
 import IORedis from "ioredis";
 
-const connection = new IORedis(process.env.KV_URL!, {
+const apiurl = process.env.KV_REST_API_URL!;
+console.log(apiurl);
+const connection = new IORedis(apiurl, {
   maxRetriesPerRequest: null,
 });
 
@@ -13,6 +14,7 @@ export const worker = new Worker(
   async (job: Job) => {
     console.log("Processing job", job.id, job.data);
     // Process your job here
+    //this is a test
   },
   { connection }
 );
